@@ -1,0 +1,25 @@
+.DS_Store
+.idea
+/backup/*
+/dump/*
+/test/*
+/konzeption/*
+/conception/*
+env.yml
+/config/deploy/localtest.rb
+/frontend/*
+/etc/php/development.ini
+/.ddev/docker-compose.yaml
+/var/*
+
+!/app/
+/app/*
+!/app/web/
+/app/web/*
+!/app/web/typo3conf/
+/app/web/typo3conf/*
+# do not commit LocalConfiguration.php (it should be must deployed manually to shared folder)
+#!/app/web/typo3conf/LocalConfiguration.php
+!/app/web/typo3conf/AdditionalConfiguration.php
+!/backup/.gitkeep
+/tmp
