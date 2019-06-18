@@ -1,0 +1,65 @@
+{
+  "name": "dwenzel/t3events-t9-dev",
+  "description": "Test project for t3events in a TYP03 9.x",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Dirk Wenzel",
+      "email": "der-wenzel@gmx.de"
+    }
+  ],
+  "require": {
+    "typo3/minimal": "^9.5",
+    "helhum/typo3-console": "^5.2",
+    "typo3/cms-tstemplate": "^9.5",
+    "typo3/cms-fluid": "^9.5",
+    "typo3/cms-fluid-styled-content": "^9.5",
+    "typo3/cms-rte-ckeditor": "^9.5",
+    "typo3/cms-install": "^9.5",
+    "typo3/cms-beuser": "^9.5",
+    "typo3/cms-belog": "^9.5"
+  },
+  "require-dev": {
+    "nimut/testing-framework": "^1.0 || ^2.0 || ^3.0 || ^4.0",
+    "dwenzel/t3events": "dev-feature/version9Compatible",
+    "dwenzel/t3calendar": "dev-feature/version9Compatible as 0.6",
+    "georgringer/news": "^7.0"
+  },
+  "config": {
+    "vendor-dir": "app/vendor",
+    "web-dir": "app/web"
+  },
+  "scripts": {
+    "package-states": [
+      "php app/vendor/bin/typo3cms install:generatepackagestates"
+    ],
+    "folder-structure": [
+      "php app/vendor/bin/typo3cms install:fixfolderstructure"
+    ],
+    "pre-deploy": [
+      "# Scripts here will be executed after composer install"
+    ],
+    "post-autoload-dump": [
+      "@package-states",
+      "@folder-structure"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DWenzel\\T3events\\Tests\\": "app/web/typo3conf/ext/t3events/Tests"
+    }
+  },
+  "extra": {
+    "typo3/class-alias-loader": {
+      "always-add-alias-loader": true
+    },
+    "autoload-case-sensitivity": false,
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": "app/web"
+    },
+    "helhum/typo3-console": {
+      "install-extension-dummy": false
+    }
+  }
+}
