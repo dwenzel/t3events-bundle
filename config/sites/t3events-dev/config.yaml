@@ -1,9 +1,9 @@
-rootPageId: 1
-base: t3events-t9.ddev.local
+rootPageId: 3
+base: 'https://t3events-t9.ddev.site/'
 baseVariants: {  }
 languages:
   -
-    title: English
+    title: english
     enabled: true
     languageId: '0'
     base: /

@@ -16,12 +16,14 @@
     "typo3/cms-fluid-styled-content": "^9.5",
     "typo3/cms-rte-ckeditor": "^9.5",
     "typo3/cms-install": "^9.5",
+    "typo3/cms-info": "^9.5",
     "typo3/cms-beuser": "^9.5",
-    "typo3/cms-belog": "^9.5"
+    "typo3/cms-belog": "^9.5",
+    "typo3/cms-lowlevel": "^9.5"
   },
   "require-dev": {
     "nimut/testing-framework": "^1.0 || ^2.0 || ^3.0 || ^4.0",
-    "dwenzel/t3events": "dev-feature/version9Compatible",
+    "dwenzel/t3events": "dev-develop",
     "dwenzel/t3calendar": "dev-feature/version9Compatible as 0.6",
     "georgringer/news": "^7.0"
   },
