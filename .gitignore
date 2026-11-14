@@ -1,25 +1,33 @@
-.DS_Store
-.idea
-/backup/*
-/dump/*
-/test/*
-/konzeption/*
-/conception/*
-env.yml
-/config/deploy/localtest.rb
-/frontend/*
-/etc/php/development.ini
-/.ddev/docker-compose.yaml
-/var/*
+# Extension working copy (separate git repository)
+/packages/*
+!/packages/.gitkeep
 
-!/app/
-/app/*
-!/app/web/
-/app/web/*
-!/app/web/typo3conf/
-/app/web/typo3conf/*
-# do not commit LocalConfiguration.php (it should be must deployed manually to shared folder)
-#!/app/web/typo3conf/LocalConfiguration.php
-!/app/web/typo3conf/AdditionalConfiguration.php
-!/backup/.gitkeep
-/tmp
+# Per-instance build output
+/instances/*/vendor/
+/instances/*/var/
+/instances/*/public/*
+!/instances/*/public/typo3conf/
+/instances/*/public/typo3conf/*
+!/instances/*/public/typo3conf/AdditionalConfiguration.php
+/instances/*/config/sites/
+/instances/*/config/system/settings.php
+/instances/*/composer.lock
+
+# Generated DDEV configuration (active TYPO3 version)
+/.ddev/config.zz-version.yaml
+
+# Leftovers of the former single-instance setup (TYPO3 9-11)
+/app/
+/var/
+/tmp/
+/.build/
+/.tests/
+
+# Tooling caches
+/.php-cs-fixer.cache
+/.phpunit.result.cache
+
+# Local editor / agent settings
+/.idea/
+**/.claude/settings.local.json
+.DS_Store
