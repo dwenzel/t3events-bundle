@@ -11,6 +11,7 @@
 !/instances/*/public/typo3conf/AdditionalConfiguration.php
 /instances/*/config/sites/
 /instances/*/config/system/settings.php
+/instances/*/config/system/settings.php.incomplete
 /instances/*/composer.lock
 
 # Generated DDEV configuration (active TYPO3 version)

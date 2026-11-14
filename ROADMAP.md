@@ -52,9 +52,10 @@ on PHP 8.
 
 | Status    | Issue | Item |
 |-----------|-------|------|
-| in review | #2    | Multi-version DDEV environment (TYPO3 11 to 14), `ddev t3-switch`, `ddev ext` (#4) |
-| in review | #3    | CI for the bundle (#5) |
-| in review | #1    | Branching model, `master` renamed to `main`, CONTRIBUTING.md, this roadmap (#6) |
+| done      | #2    | Multi-version DDEV environment (TYPO3 11 to 14), `ddev t3-switch`, `ddev ext` (#4) |
+| done      | #3    | CI for the bundle (#5) |
+| done      | #1    | Branching model, `master` renamed to `main`, CONTRIBUTING.md, this roadmap (#6) |
+| in review | #8, #9 | Setup of incomplete installations, table options for TYPO3 12+ (#10) |
 
 ## Phase 2: Branching model in the extension
 
@@ -67,8 +68,8 @@ on PHP 8.
 | open      | extension#93  | 3.x test suite (take over `Tests/` from 4.x, about 50 remaining errors), constraints, CI and publish workflow |
 | in review | extension#94  | Join `upgrade/v13` into `main` (extension#106) |
 | in review | extension#94  | TYPO3 14 support, fixes in NotificationService (extension#107) |
-| open      | extension#95  | Take over generic fixes from `upgrade/v11` into `support/typo3-v11` |
-| open      | extension#103 | Dev dependencies of `support/typo3-v11` installable on PHP 8.2 |
+| in review | extension#95  | Take over generic fixes from `upgrade/v11` into `support/typo3-v11`; only two apply, the branch is a backport of the TYPO3 12 line (extension#120) |
+| in review | extension#103 | 2.x unit tests with typo3/testing-framework 7 and PHPUnit 9.6, bugs found by the tests fixed (extension#117) |
 
 ## Phase 3: Checks and automation
 
@@ -77,7 +78,9 @@ on PHP 8.
 | in review | extension#97  | Rector and Fractor configuration on `main`, PHP 8.3 rules applied (extension#109) |
 | open      | extension#108 | TYPO3 14 deprecations that need TYPO3 13 to be dropped (5.0) |
 | in review | extension#96  | GitHub Actions on `main`: composer validate, PHP lint, Rector/Fractor, unit tests TYPO3 13.4/14.3 x PHP 8.3/8.4; Travis CI removed (extension#110) |
-| open      | extension#96  | GitHub Actions on the support branches |
+| in review | extension#96  | GitHub Actions and TER publishing on `support/typo3-v11` (extension#118) |
+| open      | extension#96  | GitHub Actions on `support/typo3-v12` |
+| open      | extension#119 | PHP 8.1 deprecations in 2.x |
 | in review | extension#98  | Publish tags to TER automatically, `ext_emconf.php` restored (extension#111); Packagist via the existing GitHub hook |
 
 ## Phase 4: Releases
