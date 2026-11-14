@@ -84,10 +84,12 @@ if [ "${run_setup}" -eq 1 ]; then
     ddev composer install --no-interaction --no-progress
     ddev composer bundle:setup
 
-    # The extension's composer.lock is untracked and survives the branch switch,
-    # so it still holds the dependencies of the previous branch or PHP version.
-    # Resolve them again for the active one.
+    # The extension's composer.lock and build directory are untracked and survive
+    # the branch switch. They hold the installation of the previous branch or PHP
+    # version, which composer can not always update (e.g. packages installed from
+    # source on one branch and from dist on the other). Install from scratch.
     if [ -f "${DDEV_APPROOT}/packages/t3events/composer.json" ]; then
+        rm -rf "${DDEV_APPROOT}/packages/t3events/.Build" "${DDEV_APPROOT}/packages/t3events/composer.lock"
         if ! "${DDEV_APPROOT}/.ddev/commands/host/ext" update --no-interaction --no-progress; then
             echo "Updating the extension's dev dependencies failed; run 'ddev ext update' to retry." >&2
         fi
