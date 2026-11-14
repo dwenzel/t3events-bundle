@@ -34,9 +34,9 @@ ddev t3-switch 12 --keep-branch   # keep the currently checked out extension bra
 `packages/t3events` has uncommitted changes), writes
 `.ddev/config.zz-version.yaml` (PHP version, docroot, composer root, database),
 restarts DDEV and runs `composer install` and `composer bundle:setup` in the
-instance. Then it runs `ddev ext update`, because the extension's untracked
-`composer.lock` still holds the dependencies of the previous branch. With
-`--no-setup`, these steps are skipped. Data of each version stays in its own
+instance. Then it removes the extension's build directory `.Build` and its
+untracked `composer.lock`, which still hold the installation of the previous
+branch, and runs `ddev ext update`. With `--no-setup`, these steps are skipped. Data of each version stays in its own
 database.
 
 The mapping of versions to PHP and extension branches is in `.ddev/versions`.
@@ -98,9 +98,14 @@ ddev ext update              # install the extension's dev dependencies (t3-swit
 ddev ext exec -- phpunit -c phpunit.xml
 ```
 
-Run `ddev ext update` after checking out another extension branch without
-`t3-switch` (or after `t3-switch --no-setup`): the branches use different
-dependencies.
+After checking out another extension branch without `t3-switch` (or after
+`t3-switch --no-setup`), install the extension's dependencies from scratch: the
+branches use different dependencies, which composer can not always update.
+
+```bash
+rm -rf packages/t3events/.Build packages/t3events/composer.lock
+ddev ext update
+```
 
 ### File synchronisation
 
