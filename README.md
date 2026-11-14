@@ -124,3 +124,8 @@ that setup (`app/`, `var/`, `tmp/`, `.build/`) are ignored and can be deleted.
 ```bash
 Build/lint.sh
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the branching model and workflow,
+and [ROADMAP.md](ROADMAP.md) for planned work.
