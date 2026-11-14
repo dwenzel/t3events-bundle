@@ -52,28 +52,33 @@ on PHP 8.
 
 | Status    | Issue | Item |
 |-----------|-------|------|
-| in review | #2    | Multi-version DDEV environment (TYPO3 11 to 14), `ddev t3-switch`, `ddev ext` |
-| in review | #3    | CI for the bundle |
-| in review | #1    | Branching model, `master` renamed to `main`, CONTRIBUTING.md, this roadmap |
+| in review | #2    | Multi-version DDEV environment (TYPO3 11 to 14), `ddev t3-switch`, `ddev ext` (#4) |
+| in review | #3    | CI for the bundle (#5) |
+| in review | #1    | Branching model, `master` renamed to `main`, CONTRIBUTING.md, this roadmap (#6) |
 
 ## Phase 2: Branching model in the extension
 
-| Status | Issue         | Item |
-|--------|---------------|------|
-| done   | extension#92  | `support/typo3-v11` created from tag 2.0.0 |
-| open   | extension#92  | Rename `master` to `main`, rulesets, CONTRIBUTING.md, support matrix, stale branches as `archive/*` tags |
-| open   | extension#93  | Join `upgrade/v12` into `support/typo3-v12` (3.x), fix the test suite |
-| open   | extension#94  | Join `upgrade/v13` into `main` (4.x): constraints for TYPO3 14, Fluid 5, failing unit tests |
-| open   | extension#95  | Take over generic fixes from `upgrade/v11` into `support/typo3-v11` |
-| open   | extension#103 | Dev dependencies of `support/typo3-v11` installable on PHP 8.2 |
+| Status    | Issue         | Item |
+|-----------|---------------|------|
+| done      | extension#92  | `master` renamed to `main`; `support/typo3-v11` and `support/typo3-v12` created from tag 2.0.0; `6.2`, `develop`, `feature/version11compatible` tagged as `archive/*`; ruleset for `main` and `support/*` |
+| in review | extension#92  | CONTRIBUTING.md, support matrix (extension#112) |
+| open      | extension#92  | Required status checks; delete archived branches; archive `upgrade/*` after integration |
+| in review | extension#93  | Join `upgrade/v12` into `support/typo3-v12` (extension#105) |
+| open      | extension#93  | 3.x test suite (take over `Tests/` from 4.x, about 50 remaining errors), constraints, CI and publish workflow |
+| in review | extension#94  | Join `upgrade/v13` into `main` (extension#106) |
+| in review | extension#94  | TYPO3 14 support, fixes in NotificationService (extension#107) |
+| open      | extension#95  | Take over generic fixes from `upgrade/v11` into `support/typo3-v11` |
+| open      | extension#103 | Dev dependencies of `support/typo3-v11` installable on PHP 8.2 |
 
 ## Phase 3: Checks and automation
 
-| Status | Issue         | Item |
-|--------|---------------|------|
-| open   | extension#96  | GitHub Actions on all maintained branches (composer validate, lint, PHPStan, unit and functional tests); Travis CI removed |
-| open   | extension#97  | Rector and Fractor configuration per branch, dry run in CI, remaining deprecations as issues |
-| open   | extension#98  | Publish tags to TER automatically (typo3/tailor); Packagist via the existing GitHub hook |
+| Status    | Issue         | Item |
+|-----------|---------------|------|
+| in review | extension#97  | Rector and Fractor configuration on `main`, PHP 8.3 rules applied (extension#109) |
+| open      | extension#108 | TYPO3 14 deprecations that need TYPO3 13 to be dropped (5.0) |
+| in review | extension#96  | GitHub Actions on `main`: composer validate, PHP lint, Rector/Fractor, unit tests TYPO3 13.4/14.3 x PHP 8.3/8.4; Travis CI removed (extension#110) |
+| open      | extension#96  | GitHub Actions on the support branches |
+| in review | extension#98  | Publish tags to TER automatically, `ext_emconf.php` restored (extension#111); Packagist via the existing GitHub hook |
 
 ## Phase 4: Releases
 
@@ -87,7 +92,7 @@ on PHP 8.
 
 | Status | Issue         | Item |
 |--------|---------------|------|
-| open   | extension#102 | PHPStan level per branch, functional tests, coverage |
+| open   | extension#102 | PHPStan, functional tests (backend modules and plugins are not covered), coverage, editorconfig; replace the compatibility shims in `Tests/Compatibility` and the `@test` annotations (PHPUnit 12) |
 | open   | extension#104 | Triage the open issues from 2016 to 2021 |
 
 Not yet planned: compatibility of dependent extensions (`t3events_course`,
