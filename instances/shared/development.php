@@ -48,10 +48,19 @@ if (is_string($databaseName) && $databaseName !== '') {
             'user' => 'root',
             'password' => 'root',
             'charset' => 'utf8mb4',
-            'tableoptions' => [
-                'charset' => 'utf8mb4',
-                'collate' => 'utf8mb4_unicode_ci',
-            ],
         ]
     );
+    // TYPO3 12 renamed tableoptions.collate to defaultTableOptions.collation
+    if ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12) {
+        $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['defaultTableOptions'] = [
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+        ];
+        unset($GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['tableoptions']);
+    } else {
+        $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['tableoptions'] = [
+            'charset' => 'utf8mb4',
+            'collate' => 'utf8mb4_unicode_ci',
+        ];
+    }
 }

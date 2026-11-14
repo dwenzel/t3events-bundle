@@ -25,6 +25,14 @@ else
     cli="vendor/bin/typo3cms"
 fi
 
+# A failed setup can leave the settings file without database tables.
+# Only an instance with backend users counts as installed.
+if [ -f "${settings_file}" ] \
+    && [ -z "$(mysql -h db -uroot -proot -N -e "SHOW TABLES LIKE 'be_users'" "${db_name}")" ]; then
+    echo "TYPO3 ${major} is not installed completely (no table be_users), moving ${settings_file} to ${settings_file}.incomplete"
+    mv "${settings_file}" "${settings_file}.incomplete"
+fi
+
 if [ -f "${settings_file}" ]; then
     echo "TYPO3 ${major} already installed (${settings_file} exists)."
 elif [ "${major}" -ge 12 ]; then
