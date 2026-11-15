@@ -87,6 +87,21 @@ ddev t3-switch 13 --keep-branch
 | `ddev t3-switch [major]`     | Switch the active TYPO3 version, or list versions           |
 | `ddev composer bundle:setup` | Install TYPO3 in the active instance (idempotent)           |
 | `ddev ext <composer args>`   | Run composer in `packages/t3events` (tests, linters)        |
+| `ddev typo3 <command>`       | Run the TYPO3 CLI of the active instance                    |
+| `ddev import-fixtures [dir]` | Import `.ddev/fixtures/*.sql` into the active instance's DB |
+
+## Test data
+
+```bash
+ddev import-fixtures                    # admin user (password Password.1), see .ddev/fixtures/
+ddev typo3 t3events:seed-fixtures       # page tree "t3events showcase" with events and plugins
+ddev typo3 t3events:seed-fixtures --purge
+```
+
+`t3events:seed-fixtures` is part of the extension (4.x line). It creates a storage
+folder with events in typical constellations and pages with event and performance
+list plugins below the root page of the site. Running it again replaces the
+fixtures. See `TESTING.md` of the extension for details.
 
 ## Testing the extension
 
