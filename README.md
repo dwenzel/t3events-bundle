@@ -88,6 +88,15 @@ ddev t3-switch 13 --keep-branch
 | `ddev composer bundle:setup` | Install TYPO3 in the active instance (idempotent)           |
 | `ddev ext <composer args>`   | Run composer in `packages/t3events` (tests, linters)        |
 
+## Readable URLs
+
+For TYPO3 13 and 14, `bundle:setup` (also run by `ddev t3-switch`) imports the
+route configuration of t3events (`EXT:t3events/Configuration/Routes/Default.yaml`)
+into the site configuration, if the checked out extension branch contains it.
+The import is marked in `config/sites/main/config.yaml` and removed again when the
+checked out branch has no route configuration. Events need a URL segment; run the
+upgrade wizard `t3eventsEventSlugUpdater` for existing events.
+
 ## Testing the extension
 
 `ddev ext` runs the extension's own composer scripts with the PHP version of the

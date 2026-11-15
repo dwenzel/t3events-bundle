@@ -70,6 +70,34 @@ else
         --web-server-config=none
 fi
 
+# Readable URLs: import the route configuration of t3events (4.x and later) into the
+# site configuration. Removed again if the checked out extension branch has no such file.
+site_config="config/sites/main/config.yaml"
+routes_file="/var/www/html/packages/t3events/Configuration/Routes/Default.yaml"
+routes_marker="# t3events-bundle: route configuration of t3events (managed by setup-instance)"
+if [ "${major}" -ge 13 ] && [ -f "${site_config}" ]; then
+    if [ -f "${routes_file}" ]; then
+        if grep -qF "${routes_marker}" "${site_config}"; then
+            :
+        elif grep -q '^imports:' "${site_config}"; then
+            echo "${site_config} already has imports; add EXT:t3events/Configuration/Routes/Default.yaml manually."
+        else
+            {
+                echo "${routes_marker}"
+                echo "imports:"
+                echo "  - { resource: 'EXT:t3events/Configuration/Routes/Default.yaml' }"
+                cat "${site_config}"
+            } > "${site_config}.tmp" && mv "${site_config}.tmp" "${site_config}"
+            echo "Route configuration of t3events imported in ${site_config}"
+        fi
+    elif grep -qF "${routes_marker}" "${site_config}"; then
+        # the marker is followed by the two lines of the import
+        awk -v marker="${routes_marker}" 'skip > 0 { skip--; next } $0 == marker { skip = 2; next } { print }' \
+            "${site_config}" > "${site_config}.tmp" && mv "${site_config}.tmp" "${site_config}"
+        echo "Route configuration of t3events removed from ${site_config} (not in the checked out extension)"
+    fi
+fi
+
 "${cli}" extension:setup
 "${cli}" cache:flush
 
