@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+## Description: Run the TYPO3 CLI of the active instance (see `ddev t3-switch`)
+## Usage: typo3 [command] [options]
+## Example: "ddev typo3 cache:flush" or "ddev typo3 t3events:seed-fixtures"
+
+set -euo pipefail
+
+major="${TYPO3_INSTANCE_VERSION:?TYPO3_INSTANCE_VERSION is not set, run ddev t3-switch <major> first}"
+cd "/var/www/html/instances/v${major}"
+
+if [ "${major}" -ge 12 ]; then
+    exec vendor/bin/typo3 "$@"
+fi
+# TYPO3 11 uses typo3-console 7 (binary typo3cms)
+exec vendor/bin/typo3cms "$@"
