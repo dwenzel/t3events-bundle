@@ -103,6 +103,15 @@ folder with events in typical constellations and pages with event and performanc
 list plugins below the root page of the site. Running it again replaces the
 fixtures. See `TESTING.md` of the extension for details.
 
+## Readable URLs
+
+For TYPO3 13 and 14, `bundle:setup` (also run by `ddev t3-switch`) imports the
+route configuration of t3events (`EXT:t3events/Configuration/Routes/Default.yaml`)
+into the site configuration, if the checked out extension branch contains it.
+The import is marked in `config/sites/main/config.yaml` and removed again when the
+checked out branch has no route configuration. Events need a URL segment; run the
+upgrade wizard `t3eventsEventSlugUpdater` for existing events.
+
 ## Testing the extension
 
 `ddev ext` runs the extension's own composer scripts with the PHP version of the
